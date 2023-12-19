@@ -63,10 +63,12 @@ bool Preprocess(const path& in_file, const path& out_file, const vector<path>& i
     }
 
     ifstream in(in_file);
-    string line;
+    if (!in) return 0;
+
     ofstream out(out_file, ios::app);
-
-
+    if (!out) return 0;
+    
+    string line;
 
     for (int i = 1; getline(in, line); ++i) {
         smatch m;
@@ -105,8 +107,6 @@ bool Preprocess(const path& in_file, const path& out_file, const vector<path>& i
             bool r = Preprocess(found_file_path, out_file, include_directories);
 
             if (!r) {
-
-
                 return 0;
             }
         }
